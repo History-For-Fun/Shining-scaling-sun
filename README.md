@@ -1,17 +1,50 @@
-/*
-// var favotiteanimals  = [the list is here];
-// My favotiteanimals are "panda", "british bull dogs", "cat", "monkey","lion", "tiger" 
-var favotiteanimals = ["panda", "british bull dogs", "cat", "monkey","lion", "tiger" ];
-// the color red
-fill(255, 0, 0);
+angleMode = "degrees";
+var backgroundColor = color(135, 206, 250);
+var sunColor = color(255, 255, 0);
+var sunStrokeColor = color(200, 200, 0);
+var sunDiameter = 100;
 
+var drawCloud = function() {
+noStroke();
+fill(255, 255, 255);
+ellipse(0, 0, 126, 97);
+ellipse(60, 0, 70, 60);
+ellipse(-60, 0, 70, 60);
+};
 
- var favotite_animals_num = 0;
-// the loop 
-  while (favotite_animals_num  < favotiteanimals.length){
-      text(favotiteanimals[favotite_animals_num], 10,           30+favotite_animals_num*30);
-      favotite_animals_num++;
-   }
+var drawSunRay = function() {
+fill(sunColor);
+noStroke();
+triangle(0, 90, -40, 0, 40, 0);
+};
 
+var drawSun = function() {
+//draw sun rays
+for(var i = 0; i < 342; i+=30) {
+pushMatrix();
+translate(200,200);
+rotate(i);
+drawSunRay();
+popMatrix();
+}
+//draw center of sun
+fill(sunColor);
+stroke(sunStrokeColor);
+ellipse(width/2, height/2, sunDiameter, sunDiameter);
+};
 
-*/
+//draw background
+background(backgroundColor);
+
+//draw sun
+var scaleF = 2;
+pushMatrix();
+translate(200 - 200 * scaleF , 200 - 200 * scaleF);
+scale(scaleF);
+drawSun();
+popMatrix();
+//draw clouds
+pushMatrix();
+translate(300,268);
+drawCloud();
+popMatrix();
